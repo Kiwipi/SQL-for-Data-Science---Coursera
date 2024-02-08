@@ -1,0 +1,94 @@
+1.
+Question 1
+All of the questions in this quiz refer to the open source Chinook Database. Please familiarize yourself with the 
+ER diagram
+ in order to familiarize yourself with the table and column names in order to write accurate queries and get the appropriate answers.
+
+Pull a list of customer ids with the customer’s full name, and address, along with combining their city and country together. Be sure to make a space in between these two and make it UPPER CASE. (e.g. LOS ANGELES USA)
+
+    SELECT customerid, 
+        firstname ||' ' || lastname AS full_name, 
+        address||' '|| upper(city)||' '|| upper(country) as full_address
+    FROM customers
+
+What is the city and country result for CustomerID 16?
+    MOUNTAIN VIEW USA
+
+
+2.
+Question 2
+All of the questions in this quiz refer to the open source Chinook Database. Please familiarize yourself with the 
+ER diagram
+ in order to familiarize yourself with the table and column names in order to write accurate queries and get the appropriate answers.
+
+Create a new employee user id by combining the first 4 letters of the employee’s first name with the first 2 letters of the employee’s last name. Make the new field lower case and pull each individual step to show your work.
+
+    SELECT firstname, lastname, LOWER(SUBSTR(firstname, 1, 4) ||SUBSTR(lastname, 1,2)) AS New_employee_user_id
+    FROM employees
+
+What is the final result for Robert King?
+    robeki
+
+3.
+Question 3
+All of the questions in this quiz refer to the open source Chinook Database. Please familiarize yourself with the 
+ER diagram
+ in order to familiarize yourself with the table and column names in order to write accurate queries and get the appropriate answers.
+
+Show a list of employees who have worked for the company for 15 or more years using the current date function. Sort by lastname ascending.
+
+    SELECT employeeid, firstname || ' '|| lastname, date('now') - date(HIREDATE) as YEARS
+    FROM employees
+    WHERE  YEARS>= 15
+    ORDER BY LASTNAME ASC
+
+What is the lastname of the last person on the list returned?
+    Peacock
+
+4.
+Question 4
+All of the questions in this quiz refer to the open source Chinook Database. Please familiarize yourself with the 
+ER diagram
+ in order to familiarize yourself with the table and column names in order to write accurate queries and get the appropriate answers.
+
+Profiling the Customers table, answer the following question.
+    SELECT *
+    FROM customers 
+    WHERE [some_colums] IS NULL;
+-- some_column: FirstName, PostalCode, Company, Fax, Phone, Address
+-- Answers: Postal Code, Company, Fax, Phone
+Are there any columns with null values? Indicate any below. Select all that apply.
+
+5.
+Question 5
+All of the questions in this quiz refer to the open source Chinook Database. Please familiarize yourself with the 
+ER diagram
+ in order to familiarize yourself with the table and column names in order to write accurate queries and get the appropriate answers.
+
+Find the cities with the most customers and rank in descending order.
+
+    SELECT city, count(*) FROM customers
+    GROUP BY city
+    order by count(*) desc
+
+Which of the following cities indicate having 2 customers?
+    São Paulo
+    Mountain View
+    London
+
+6.
+Question 6
+All of the questions in this quiz refer to the open source Chinook Database. Please familiarize yourself with the 
+ER diagram
+ in order to familiarize yourself with the table and column names in order to write accurate queries and get the appropriate answers.
+
+Create a new customer invoice id by combining a customer’s invoice id with their first and last name while ordering your query in the following order: firstname, lastname, and invoiceID.
+    
+    SELECT c.firstname|| c.lastname||i.invoiceid AS ID
+    FROM customers c JOIN invoices i
+    ON c.customerid=i.customerid and c.firstname||c.lastname = 'AstridGruber'
+
+Select all of the correct "AstridGruber" entries that are returned in your results below. Select all that apply.
+    AstridGruber273
+    AstridGruber296
+    AstridGruber370
